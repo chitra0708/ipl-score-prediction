@@ -5,3 +5,4 @@ venv/
 mini project/
 datasets/*.exe
 datasets/*.zip
+speed_model.pkl
