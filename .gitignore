@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+mini project/
+datasets/*.exe
+datasets/*.zip

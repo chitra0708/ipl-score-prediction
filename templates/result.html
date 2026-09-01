@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>IPL Prediction Result</title>
+
+<style>
+
+    body {
+
+        margin: 0;
+
+        min-height: 100vh;
+
+        background:
+            url("/static/images/front_page_bg.jpeg");
+
+        background-size: cover;
+
+        background-position: center;
+
+        background-attachment: fixed;
+
+        font-family: Arial, sans-serif;
+
+        color: white;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: center;
+
+    }
+
+    .container {
+
+        width: 500px;
+
+        padding: 30px;
+
+        background:
+            rgba(0, 0, 0, 0.78);
+
+        border-radius: 15px;
+
+        text-align: center;
+
+        box-shadow:
+            0 0 25px
+            rgba(0, 0, 0, 0.6);
+
+    }
+
+    h1 {
+
+        margin-bottom: 25px;
+
+    }
+
+    .teams {
+
+        display: flex;
+
+        justify-content: space-between;
+
+        margin-bottom: 15px;
+
+        font-size: 18px;
+
+    }
+
+    .card {
+
+        background:
+            rgba(255, 255, 255, 0.10);
+
+        padding: 15px;
+
+        margin: 12px 0;
+
+        border-radius: 10px;
+
+    }
+
+    .label {
+
+        font-size: 14px;
+
+        color: #cccccc;
+
+    }
+
+    .value {
+
+        font-size: 25px;
+
+        font-weight: bold;
+
+        margin-top: 5px;
+
+    }
+
+    .winner {
+
+        font-size: 22px;
+
+        color: #00ff88;
+
+    }
+
+    .probability {
+
+        font-size: 22px;
+
+        color: #ffd700;
+
+    }
+
+    .speed {
+
+        font-size: 22px;
+
+        color: #00d9ff;
+
+    }
+
+    .strike-rate {
+
+        font-size: 22px;
+
+        color: #ff8c00;
+
+    }
+
+    .button {
+
+        display: block;
+
+        margin-top: 25px;
+
+        padding: 12px;
+
+        background: green;
+
+        color: white;
+
+        text-decoration: none;
+
+        border-radius: 7px;
+
+        font-weight: bold;
+
+    }
+
+    .button:hover {
+
+        background: darkgreen;
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏏 IPL Prediction Result</h1>
+
+<!-- TEAMS -->
+
+<div class="teams">
+
+
+<div>
+
+    <div class="label">
+        Batting Team
+    </div>
+
+    <strong>
+        {{ batting_team }}
+    </strong>
+
+</div>
+
+
+<div>
+
+    <div class="label">
+        Bowling Team
+    </div>
+
+    <strong>
+        {{ bowling_team }}
+    </strong>
+
+</div>
+
+
+</div>
+
+<!-- IPL TEAMS FLOW ONLY -->
+
+{% if batter and bowler %}
+
+<div class="card">
+
+
+<div class="label">
+    👤 Selected Batter
+</div>
+
+<div class="value">
+    {{ batter }}
+</div>
+
+
+</div>
+
+<div class="card">
+
+
+<div class="label">
+    🎯 Selected Bowler
+</div>
+
+<div class="value">
+    {{ bowler }}
+</div>
+
+
+</div>
+
+{% endif %}
+
+<!-- CURRENT SCORE -->
+
+<div class="card">
+
+
+<div class="label">
+    Current Score
+</div>
+
+<div class="value">
+    {{ score }}
+</div>
+
+
+</div>
+
+<!-- OVERS -->
+
+<div class="card">
+
+
+<div class="label">
+    Overs
+</div>
+
+<div class="value">
+    {{ overs }}
+</div>
+
+
+</div>
+
+<!-- WICKETS -->
+
+<div class="card">
+
+
+<div class="label">
+    Wickets
+</div>
+
+<div class="value">
+    {{ wickets }}
+</div>
+
+
+</div>
+
+<!-- RUN RATE -->
+
+<div class="card">
+
+
+<div class="label">
+    Current Run Rate
+</div>
+
+<div class="value">
+    {{ run_rate }}
+</div>
+
+
+</div>
+
+<!-- PITCH TYPE -->
+
+<div class="card">
+
+
+<div class="label">
+    🏟️ Pitch Type
+</div>
+
+<div class="value">
+    {{ pitch_type }}
+</div>
+
+
+</div>
+
+<!-- FINAL SCORE -->
+
+<div class="card">
+
+
+<div class="label">
+    Predicted Final Score
+</div>
+
+<div class="value">
+    {{ prediction }}
+</div>
+
+
+</div>
+
+<!-- SCORE RANGE -->
+
+<div class="card">
+
+
+<div class="label">
+    Expected Score Range
+</div>
+
+<div class="value">
+    {{ min_score }} - {{ max_score }}
+</div>
+
+
+</div>
+
+<!-- BALL SPEED -->
+
+<div class="card">
+
+
+<div class="label">
+    ⚡ Predicted Ball Speed
+</div>
+
+<div class="speed">
+    {{ predicted_speed }} m/s
+</div>
+
+
+</div>
+
+<!-- STRIKE RATE -->
+
+<div class="card">
+
+
+<div class="label">
+    🏏 Batter Strike Rate
+</div>
+
+<div class="strike-rate">
+    {{ predicted_strike_rate }}
+</div>
+
+
+</div>
+
+<!-- WINNING TEAM -->
+
+<div class="card">
+
+
+<div class="label">
+    Predicted Winning Team
+</div>
+
+<div class="winner">
+    {{ winning_team }}
+</div>
+
+
+</div>
+
+<!-- WINNING PROBABILITY -->
+
+<div class="card">
+
+
+<div class="label">
+    Winning Probability
+</div>
+
+<div class="probability">
+    {{ win_prob }}%
+</div>
+
+
+</div>
+
+<a href="{{ url_for('home') }}" class="button">
+
+
+🔄 New Prediction
+
+
+</a>
+
+</div>
+
+</body>
+
+</html>

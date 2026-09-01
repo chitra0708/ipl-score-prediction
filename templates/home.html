@@ -1,0 +1,205 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<title>IPL Score Prediction</title> 
+ 
+<style> 
+ 
+/* RESET */ 
+*{ 
+    margin:0; 
+    padding:0; 
+    box-sizing:border-box; 
+    font-family:Arial,sans-serif; 
+} 
+ 
+/* BACKGROUND */ 
+body{ 
+    min-height:100vh; 
+ 
+    background: 
+    linear-gradient( 
+        rgba(0,0,0,0.55), 
+        rgba(0,0,0,0.55) 
+    ), 
+    url("/static/images/front_page_bg.jpeg"); 
+ 
+    background-size:cover; 
+    background-position:center; 
+    background-repeat:no-repeat; 
+    background-attachment:fixed; 
+} 
+ 
+/* NAVBAR */ 
+.navbar{ 
+    background:#001633; 
+    height:70px; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    padding:0 40px; 
+} 
+ 
+.logo{ 
+    color:white; 
+    font-size:28px; 
+    font-weight:bold; 
+} 
+ 
+.menu a{ 
+    color:white; 
+    text-decoration:none; 
+    margin-left:25px; 
+    font-size:18px; 
+} 
+ 
+.menu a:hover{ 
+    color:#ffa500; 
+} 
+ 
+/* CENTER CARD */ 
+.container{ 
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    height:calc(100vh - 140px); 
+} 
+ 
+.card{ 
+    width:420px; 
+    background:rgba(255,255,255,0.12); 
+    backdrop-filter:blur(10px); 
+    border-radius:20px; 
+    padding:25px; 
+    text-align:center; 
+    box-shadow:0 0 15px rgba(0,0,0,0.3); 
+} 
+ 
+.card h1{ 
+    color:white; 
+    font-size:34px; 
+} 
+ 
+.card span{ 
+    color:#ffa500; 
+} 
+ 
+.card p{ 
+    color:white; 
+    margin-top:15px; 
+    font-size:18px; 
+    line-height:1.5; 
+} 
+ 
+/* BUTTONS */ 
+.btn{ 
+    width:100%; 
+    padding:15px; 
+    margin-top:18px; 
+    background:#ffa500; 
+    border:none; 
+    border-radius:12px; 
+    color:white; 
+    font-size:18px; 
+    cursor:pointer; 
+    transition:0.3s; 
+} 
+ 
+.btn:hover{ 
+    background:#ff8c00; 
+    transform:scale(1.03); 
+} 
+ 
+/* FOOTER */ 
+.footer{ 
+    position:fixed; 
+    bottom:50px; 
+    width:100%; 
+    text-align:center; 
+    color:white; 
+    font-size:18px; 
+} 
+ 
+/* LIVE BAR */ 
+.live{ 
+    position:fixed; 
+    bottom:0; 
+    width:100%; 
+    background:#001633; 
+    color:white; 
+    text-align:center; 
+    padding:15px; 
+    font-size:18px; 
+} 
+ 
+</style> 
+</head> 
+ 
+<body> 
+ 
+<!-- NAVBAR --> 
+<div class="navbar"> 
+ 
+    <div class="logo"> 
+        🏏 IPL SCORE PREDICTION 
+    </div> 
+ 
+    <div class="menu"> 
+        <a href="{{ url_for('home') }}">Home</a> 
+        <a href="{{ url_for('predict') }}">Live Prediction</a> 
+        <a href="{{ url_for('teams') }}">Teams</a> 
+        <a href="#">Contact</a> 
+        <a href="#">Support</a> 
+        <a href="#">Help</a> 
+    </div> 
+ 
+</div> 
+ 
+<!-- CENTER CARD --> 
+<div class="container"> 
+ 
+    <div class="card"> 
+ 
+        <h1> 
+            Welcome To 
+            <span>IPL Analytics</span> 
+        </h1> 
+ 
+        <p> 
+            Machine Learning Based IPL Score Prediction 
+            And Analytics Dashboard 
+        </p> 
+ 
+        <!-- IPL TEAMS BUTTON --> 
+        <a href="{{ url_for('teams') }}"> 
+            <button class="btn"> 
+                🏏 IPL TEAMS 
+            </button> 
+        </a> 
+ 
+        <!-- START PREDICTION BUTTON --> 
+        <a href="{{ url_for('start_prediction') }}"> 
+            <button class="btn"> 
+                📈 START PREDICTION 
+            </button> 
+        </a> 
+ 
+    </div> 
+ 
+</div> 
+ 
+<!-- FOOTER --> 
+<div class="footer"> 
+    © 2026 IPL Score Prediction Project 
+</div> 
+ 
+<!-- LIVE BAR --> 
+<div class="live"> 
+    🔴 LIVE : CSK 182/4 | MI 175/8 | RCB vs KKR | SRH 168/6 
+</div> 
+ 
+</body> 
+</html>
+

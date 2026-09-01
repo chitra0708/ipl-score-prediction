@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPL Teams</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("/static/images/front_page_bg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+.navbar {
+    background: #001633;
+    padding: 22px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.heading {
+    text-align: center;
+    margin: 35px 0 10px;
+    font-size: 36px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #cccccc;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.selected-info {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    padding: 18px;
+    text-align: center;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(8px);
+
+    font-size: 17px;
+}
+
+.selected-info strong {
+    color: #ffd700;
+}
+
+.teams-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 25px;
+
+    padding-bottom: 60px;
+}
+
+.team-card {
+    min-height: 180px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,0.20);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color: white;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.35);
+
+    transition: 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+
+    background: rgba(255,255,255,0.20);
+
+    box-shadow: 0 0 30px rgba(255,165,0,0.45);
+}
+
+.team-code {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.team-name {
+    font-size: 18px;
+    color: #eeeeee;
+    margin-bottom: 15px;
+}
+
+.select-text {
+    font-size: 14px;
+    color: #ffd700;
+}
+
+.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.back {
+    display: block;
+
+    width: max-content;
+
+    margin: 0 auto 30px;
+
+    padding: 10px 20px;
+
+    background: #333;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+.back:hover {
+    background: #555;
+}
+
+@media(max-width:1000px) {
+    .teams-container {
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media(max-width:750px) {
+    .teams-container {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px) {
+    .teams-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+    🏏 IPL SCORE PREDICTION
+</div>
+
+{% set batting = request.args.get('batting', '') %}
+{% set batter = request.args.get('batter', '') %}
+{% set mode = request.args.get('mode', 'batting') %}
+
+{% if mode == 'bowling' %}
+
+<h1 class="heading">
+    Select Bowling Team
+</h1>
+
+<div class="subtitle">
+    Choose the team that is bowling
+</div>
+
+<div class="selected-info">
+    🏏 Batting Team:
+    <strong>{{ batting }}</strong>
+
+
+&nbsp;&nbsp; | &nbsp;&nbsp;
+
+👤 Batter:
+<strong>{{ batter }}</strong>
+
+
+</div>
+
+{% else %}
+
+<h1 class="heading">
+    Select Batting Team
+</h1>
+
+<div class="subtitle">
+    Choose the team that is batting
+</div>
+
+{% endif %}
+
+<a href="{{ url_for('home') }}" class="back">
+    ← Back to Home
+</a>
+
+<div class="teams-container">
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='CSK') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='CSK') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'CSK' %}disabled{% endif %}">
+
+<div class="team-code">CSK</div>
+<div class="team-name">Chennai Super Kings</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='MI') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='MI') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'MI' %}disabled{% endif %}">
+
+<div class="team-code">MI</div>
+<div class="team-name">Mumbai Indians</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='RCB') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='RCB') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'RCB' %}disabled{% endif %}">
+
+<div class="team-code">RCB</div>
+<div class="team-name">Royal Challengers Bengaluru</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='KKR') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='KKR') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'KKR' %}disabled{% endif %}">
+
+<div class="team-code">KKR</div>
+<div class="team-name">Kolkata Knight Riders</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='SRH') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='SRH') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'SRH' %}disabled{% endif %}">
+
+<div class="team-code">SRH</div>
+<div class="team-name">Sunrisers Hyderabad</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='RR') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='RR') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'RR' %}disabled{% endif %}">
+
+<div class="team-code">RR</div>
+<div class="team-name">Rajasthan Royals</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='DC') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='DC') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'DC' %}disabled{% endif %}">
+
+<div class="team-code">DC</div>
+<div class="team-name">Delhi Capitals</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='PBKS') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='PBKS') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'PBKS' %}disabled{% endif %}">
+
+<div class="team-code">PBKS</div>
+<div class="team-name">Punjab Kings</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='GT') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='GT') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'GT' %}disabled{% endif %}">
+
+<div class="team-code">GT</div>
+<div class="team-name">Gujarat Titans</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+<a href="{% if mode == 'bowling' %}{{ url_for('players', team='LSG') }}?mode=bowling&batting={{ batting }}&batter={{ batter }}{% else %}{{ url_for('players', team='LSG') }}?mode=batting{% endif %}"
+class="team-card {% if mode == 'bowling' and batting == 'LSG' %}disabled{% endif %}">
+
+<div class="team-code">LSG</div>
+<div class="team-name">Lucknow Super Giants</div>
+
+<div class="select-text">
+{% if mode == 'bowling' %}
+Select Bowling Team →
+{% else %}
+Select Batting Team →
+{% endif %}
+</div>
+
+</a>
+
+</div>
+
+</body>
+</html>

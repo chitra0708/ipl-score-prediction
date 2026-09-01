@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IPL Prediction</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("/static/images/front_page_bg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.container {
+
+    width: 480px;
+
+    background: rgba(0,0,0,0.75);
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+h1 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 30px;
+}
+
+
+/* =====================================================
+   SELECTED IPL TEAM / PLAYER INFORMATION
+   ===================================================== */
+
+.selected-info {
+
+    background: rgba(255,255,255,0.10);
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    line-height: 1.8;
+
+    font-size: 16px;
+}
+
+.selected-info strong {
+
+    color: #ffd700;
+
+}
+
+
+/* =====================================================
+   FORM
+   ===================================================== */
+
+label {
+
+    display: block;
+
+    margin-top: 12px;
+
+    margin-bottom: 6px;
+
+}
+
+select,
+input {
+
+    width: 100%;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 22px;
+
+    background: green;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+button:hover {
+
+    background: #0b8f0b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+
+🏏 IPL ML Prediction
+
+</h1>
+
+<!-- =====================================================
+     IPL TEAMS FLOW INFORMATION
+     This appears only when batter/bowler data exists
+     ===================================================== -->
+
+{% set batting = request.args.get('batting', '') %}
+{% set batter = request.args.get('batter', '') %}
+{% set bowling = request.args.get('bowling', '') %}
+{% set bowler = request.args.get('bowler', '') %}
+
+{% if batting and bowling %}
+
+<div class="selected-info">
+
+🏏 Batting Team: <strong>{{ batting }}</strong>
+
+<br>
+
+👤 Batter: <strong>{{ batter }}</strong>
+
+<br>
+
+🎯 Bowling Team: <strong>{{ bowling }}</strong>
+
+<br>
+
+🎯 Bowler: <strong>{{ bowler }}</strong>
+
+</div>
+
+{% endif %}
+
+<form action="/predict" method="post">
+
+<!-- =====================================================
+     HIDDEN VALUES FOR IPL TEAMS FLOW
+     ===================================================== -->
+
+<input
+type="hidden"
+name="batter"
+value="{{ batter }}"
+
+>
+
+<input
+type="hidden"
+name="bowler"
+value="{{ bowler }}"
+
+>
+
+<!-- =====================================================
+     BATTING TEAM
+     ===================================================== -->
+
+<label>
+
+Batting Team
+
+</label>
+
+<select name="batting_team" required>
+
+<option value="">
+Select Batting Team
+</option>
+
+<option value="CSK"
+{% if batting == "CSK" %}selected{% endif %}>
+CSK
+</option>
+
+<option value="MI"
+{% if batting == "MI" %}selected{% endif %}>
+MI
+</option>
+
+<option value="RCB"
+{% if batting == "RCB" %}selected{% endif %}>
+RCB
+</option>
+
+<option value="KKR"
+{% if batting == "KKR" %}selected{% endif %}>
+KKR
+</option>
+
+<option value="SRH"
+{% if batting == "SRH" %}selected{% endif %}>
+SRH
+</option>
+
+<option value="RR"
+{% if batting == "RR" %}selected{% endif %}>
+RR
+</option>
+
+<option value="DC"
+{% if batting == "DC" %}selected{% endif %}>
+DC
+</option>
+
+<option value="PBKS"
+{% if batting == "PBKS" %}selected{% endif %}>
+PBKS
+</option>
+
+<option value="GT"
+{% if batting == "GT" %}selected{% endif %}>
+GT
+</option>
+
+<option value="LSG"
+{% if batting == "LSG" %}selected{% endif %}>
+LSG
+</option>
+
+</select>
+
+<!-- =====================================================
+     BOWLING TEAM
+     ===================================================== -->
+
+<label>
+
+Bowling Team
+
+</label>
+
+<select name="bowling_team" required>
+
+<option value="">
+Select Bowling Team
+</option>
+
+<option value="CSK"
+{% if bowling == "CSK" %}selected{% endif %}>
+CSK
+</option>
+
+<option value="MI"
+{% if bowling == "MI" %}selected{% endif %}>
+MI
+</option>
+
+<option value="RCB"
+{% if bowling == "RCB" %}selected{% endif %}>
+RCB
+</option>
+
+<option value="KKR"
+{% if bowling == "KKR" %}selected{% endif %}>
+KKR
+</option>
+
+<option value="SRH"
+{% if bowling == "SRH" %}selected{% endif %}>
+SRH
+</option>
+
+<option value="RR"
+{% if bowling == "RR" %}selected{% endif %}>
+RR
+</option>
+
+<option value="DC"
+{% if bowling == "DC" %}selected{% endif %}>
+DC
+</option>
+
+<option value="PBKS"
+{% if bowling == "PBKS" %}selected{% endif %}>
+PBKS
+</option>
+
+<option value="GT"
+{% if bowling == "GT" %}selected{% endif %}>
+GT
+</option>
+
+<option value="LSG"
+{% if bowling == "LSG" %}selected{% endif %}>
+LSG
+</option>
+
+</select>
+
+<!-- =====================================================
+     CURRENT SCORE
+     ===================================================== -->
+
+<label>
+
+Current Score
+
+</label>
+
+<input
+type="number"
+name="score"
+placeholder="Enter Current Score"
+min="0"
+required
+
+>
+
+<!-- =====================================================
+     OVERS
+     ===================================================== -->
+
+<label>
+
+Overs
+
+</label>
+
+<input
+type="number"
+step="0.1"
+name="overs"
+placeholder="Enter Overs"
+min="0"
+max="20"
+required
+
+>
+
+<!-- =====================================================
+     WICKETS
+     ===================================================== -->
+
+<label>
+
+Wickets
+
+</label>
+
+<input
+type="number"
+name="wickets"
+placeholder="Enter Wickets"
+min="0"
+max="10"
+required
+
+>
+
+<!-- =====================================================
+     PITCH TYPE
+     ===================================================== -->
+
+<label>
+
+Pitch Type
+
+</label>
+
+<select name="pitch_type" required>
+
+<option value="">
+Select Pitch Type
+</option>
+
+<option value="Batting">
+Batting
+</option>
+
+<option value="Bowling">
+Bowling
+</option>
+
+<option value="Balanced">
+Balanced
+</option>
+
+</select>
+
+<!-- =====================================================
+     PREDICT BUTTON
+     ===================================================== -->
+
+<button type="submit">
+
+Predict
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+
+</html>

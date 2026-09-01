@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>{{ team }} Players</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.60),
+        rgba(0,0,0,0.60)
+    ),
+    url("/static/images/front_page_bg.jpeg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    color:white;
+
+}
+
+.navbar{
+
+    background:#001633;
+
+    padding:25px;
+
+    text-align:center;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+.heading{
+
+    text-align:center;
+
+    margin:35px 0;
+
+    font-size:38px;
+
+}
+
+.players-container{
+
+    width:90%;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:25px;
+
+    padding-bottom:50px;
+
+}
+
+.player-card{
+
+    background:
+    rgba(255,255,255,0.12);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 20px
+    rgba(0,0,0,0.3);
+
+    transition:0.3s;
+
+}
+
+.player-card:hover{
+
+    transform:
+    translateY(-8px);
+
+    box-shadow:
+    0 0 20px
+    orange;
+
+}
+
+.player-image{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin-bottom:15px;
+
+}
+
+.player-name{
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+}
+
+.role{
+
+    font-size:17px;
+
+    color:#ffd700;
+
+}
+
+.back{
+
+    display:block;
+
+    width:max-content;
+
+    margin:0 auto 30px;
+
+    color:white;
+
+    text-decoration:none;
+
+    background:#333;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+}
+
+@media(max-width:1000px){
+
+    .players-container{
+
+        grid-template-columns:
+        repeat(3,1fr);
+
+    }
+
+}
+
+@media(max-width:750px){
+
+    .players-container{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .players-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    🏏 {{ team }} TEAM - IPL 2026
+
+</div>
+
+
+<h1 class="heading">
+
+    {{ team }} Players
+
+</h1>
+
+
+<a href="{{ url_for('teams') }}"
+   class="back">
+
+    ← Back to Teams
+
+</a>
+
+
+<div class="players-container">
+
+
+{% if team == "CSK" %}
+
+    <div class="player-card">
+        <div class="player-name">
+            Anshul Kamboj
+        </div>
+        <div class="role">
+            🔄 All-Rounder
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Gurjapneet Singh
+        </div>
+        <div class="role">
+            🎯 Bowler
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Jamie Overton
+        </div>
+        <div class="role">
+            🔄 All-Rounder
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            MS Dhoni
+        </div>
+        <div class="role">
+            🧤 Wicket Keeper
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Mukesh Choudhary
+        </div>
+        <div class="role">
+            🎯 Bowler
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Nathan Ellis
+        </div>
+        <div class="role">
+            🎯 Bowler
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Noor Ahmad
+        </div>
+        <div class="role">
+            🎯 Bowler
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Ramakrishna Ghosh
+        </div>
+        <div class="role">
+            🔄 All-Rounder
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Sanju Samson
+        </div>
+        <div class="role">
+            🧤 Wicket Keeper
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Ruturaj Gaikwad
+        </div>
+        <div class="role">
+            🏏 Batter
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Shivam Dube
+        </div>
+        <div class="role">
+            🔄 All-Rounder
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Shreyas Gopal
+        </div>
+        <div class="role">
+            🔄 All-Rounder
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Khaleel Ahmed
+        </div>
+        <div class="role">
+            🎯 Bowler
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Ayush Mhatre
+        </div>
+        <div class="role">
+            🏏 Batter
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Dewald Brevis
+        </div>
+        <div class="role">
+            🏏 Batter
+        </div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">
+            Urvil Patel
+        </div>
+        <div class="role">
+            🧤 Wicket Keeper
+        </div>
+    </div>
+
+
+{% elif team == "MI" %}
+
+    <div class="player-card">
+        <div class="player-name">Hardik Pandya</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rohit Sharma</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Suryakumar Yadav</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Tilak Varma</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jasprit Bumrah</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Trent Boult</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Deepak Chahar</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Will Jacks</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ryan Rickelton</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Naman Dhir</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mitchell Santner</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ruchit Ahir</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mahipal Lomror</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+
+{% elif team == "RCB" %}
+
+    <div class="player-card">
+        <div class="player-name">Rajat Patidar</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Virat Kohli</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Devdutt Padikkal</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Phil Salt</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jitesh Sharma</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jordan Cox</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Krunal Pandya</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Tim David</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Romario Shepherd</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jacob Bethell</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Venkatesh Iyer</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Bhuvneshwar Kumar</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Josh Hazlewood</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Yash Dayal</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Suyash Sharma</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+
+{% elif team == "GT" %}
+
+    <div class="player-card">
+        <div class="player-name">Shubman Gill</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Sai Sudharsan</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jos Buttler</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Kumar Kushagra</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Anuj Rawat</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Glenn Phillips</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Washington Sundar</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rashid Khan</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mohammed Siraj</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Kagiso Rabada</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Prasidh Krishna</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jason Holder</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rahul Tewatia</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+
+{% elif team == "KKR" %}
+
+    <div class="player-card">
+        <div class="player-name">Ajinkya Rahane</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rinku Singh</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Angkrish Raghuvanshi</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Manish Pandey</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Vaibhav Arora</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Varun Chakaravarthy</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Harshit Rana</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Sunil Narine</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ramandeep Singh</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Anukul Roy</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rovman Powell</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+
+{% elif team == "DC" %}
+
+    <div class="player-card">
+        <div class="player-name">KL Rahul</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Abhishek Porel</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Axar Patel</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Nitish Rana</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ashutosh Sharma</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Karun Nair</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Kuldeep Yadav</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mitchell Starc</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mukesh Kumar</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">T Natarajan</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Sameer Rizvi</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Tristan Stubbs</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+
+{% elif team == "PBKS" %}
+
+    <div class="player-card">
+        <div class="player-name">Shreyas Iyer</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Prabhsimran Singh</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Shashank Singh</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Arshdeep Singh</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Yuzvendra Chahal</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Marcus Stoinis</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Marco Jansen</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Nehal Wadhera</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+
+{% elif team == "RR" %}
+
+    <div class="player-card">
+        <div class="player-name">Yashasvi Jaiswal</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Vaibhav Sooryavanshi</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Dhruv Jurel</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Riyan Parag</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jofra Archer</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ravindra Jadeja</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Donovan Ferreira</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+
+{% elif team == "LSG" %}
+
+    <div class="player-card">
+        <div class="player-name">Rishabh Pant</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Aiden Markram</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Nicholas Pooran</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ayush Badoni</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mayank Yadav</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Avesh Khan</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Mohsin Khan</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Arjun Tendulkar</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Shahbaz Ahmed</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+
+{% elif team == "SRH" %}
+
+    <div class="player-card">
+        <div class="player-name">Pat Cummins</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Travis Head</div>
+        <div class="role">🏏 Batter</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Abhishek Sharma</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Ishan Kishan</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Heinrich Klaasen</div>
+        <div class="role">🧤 Wicket Keeper</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Nitish Kumar Reddy</div>
+        <div class="role">🔄 All-Rounder</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Rahul Chahar</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Harshal Patel</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+    <div class="player-card">
+        <div class="player-name">Jaydev Unadkat</div>
+        <div class="role">🎯 Bowler</div>
+    </div>
+
+
+{% else %}
+
+    <div class="player-card">
+
+        <div class="player-name">
+            Team not found
+        </div>
+
+    </div>
+
+{% endif %}
+
+
+</div>
+
+</body>
+
+</html>

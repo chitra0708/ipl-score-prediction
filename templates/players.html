@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>{{ team }} Players</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.65)
+    ),
+    url("/static/images/front_page_bg.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+.navbar {
+
+    background: #001633;
+
+    padding: 22px;
+
+    text-align: center;
+
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+.heading {
+
+    text-align: center;
+
+    margin: 35px 0 10px;
+
+    font-size: 36px;
+}
+
+.info {
+
+    text-align: center;
+
+    color: #ffd700;
+
+    font-size: 18px;
+
+    margin-bottom: 25px;
+}
+
+.selected-info {
+
+    width: 90%;
+
+    max-width: 750px;
+
+    margin: 0 auto 30px;
+
+    padding: 18px 20px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(8px);
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+.selected-info strong {
+
+    color: #ffd700;
+
+    margin-left: 5px;
+
+    margin-right: 5px;
+}
+
+.separator {
+
+    color: #aaaaaa;
+
+    margin: 0 8px;
+}
+
+.back {
+
+    display: block;
+
+    width: max-content;
+
+    margin: 0 auto 30px;
+
+    padding: 10px 20px;
+
+    background: #333;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+.back:hover {
+
+    background: #555;
+}
+
+.players-container {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 22px;
+
+    padding-bottom: 50px;
+}
+
+.player-card {
+
+    min-height: 165px;
+
+    padding: 25px 15px;
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,0.20);
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+
+    transition: 0.3s;
+}
+
+.player-card:hover {
+
+    transform: translateY(-7px);
+
+    background: rgba(255,255,255,0.20);
+
+    box-shadow: 0 0 25px rgba(255,165,0,0.45);
+}
+
+.player-number {
+
+    color: #aaaaaa;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+}
+
+.player-name {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+.role {
+
+    color: #ffd700;
+
+    font-size: 16px;
+}
+
+@media(max-width:1000px) {
+
+    .players-container {
+
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+@media(max-width:750px) {
+
+    .players-container {
+
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px) {
+
+    .players-container {
+
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+🏏 IPL SCORE PREDICTION
+
+</div>
+
+{% set mode = request.args.get('mode', 'batting') %}
+
+{% set batting = request.args.get('batting', '') %}
+
+{% set batter = request.args.get('batter', '') %}
+
+{% if mode == 'bowling' %}
+
+<h1 class="heading">
+
+{{ team }} Bowlers
+
+</h1>
+
+<div class="info">
+
+🎯 Select a Bowler
+
+</div>
+
+<div class="selected-info">
+
+<span>🏏 Batting Team:</span> <strong>{{ batting }}</strong>
+
+<span class="separator">|</span>
+
+<span>👤 Batter:</span> <strong>{{ batter }}</strong>
+
+<br>
+
+<span>🎯 Bowling Team:</span> <strong>{{ team }}</strong>
+
+</div>
+
+{% else %}
+
+<h1 class="heading">
+
+{{ team }} Players
+
+</h1>
+
+<div class="info">
+
+🏏 Select a Batter
+
+</div>
+
+{% endif %}
+
+<a href="{{ url_for('teams') }}" class="back">
+
+← Back to Teams
+
+</a>
+
+<div class="players-container">
+
+{% if mode == 'bowling' %}
+
+
+{% for player in players %}
+
+    {% if player[1] == "Bowler" %}
+
+    <a href="{{ url_for('predict') }}?batting={{ batting }}&batter={{ batter }}&bowling={{ team }}&bowler={{ player[0] }}"
+       style="text-decoration:none;">
+
+        <div class="player-card">
+
+            <div class="player-number">
+                Bowler
+            </div>
+
+            <div class="player-name">
+                {{ player[0] }}
+            </div>
+
+            <div class="role">
+                🎯 Bowler
+            </div>
+
+        </div>
+
+    </a>
+
+    {% endif %}
+
+{% endfor %}
+
+
+{% else %}
+
+
+{% for player in players %}
+
+    {% if player[1] == "Batter"
+       or player[1] == "Wicket Keeper"
+       or player[1] == "All-Rounder" %}
+
+    <a href="{{ url_for('teams') }}?mode=bowling&batting={{ team }}&batter={{ player[0] }}"
+       style="text-decoration:none;">
+
+        <div class="player-card">
+
+            <div class="player-number">
+                Player
+            </div>
+
+            <div class="player-name">
+                {{ player[0] }}
+            </div>
+
+            <div class="role">
+
+                {% if player[1] == "Batter" %}
+
+                    🏏 Batter
+
+                {% elif player[1] == "Wicket Keeper" %}
+
+                    🧤 Wicket Keeper
+
+                {% elif player[1] == "All-Rounder" %}
+
+                    🔄 All-Rounder
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </a>
+
+    {% endif %}
+
+{% endfor %}
+```
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>
